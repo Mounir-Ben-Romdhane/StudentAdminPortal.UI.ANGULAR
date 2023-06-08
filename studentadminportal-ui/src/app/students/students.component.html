@@ -52,10 +52,20 @@
           <mat-cell *matCellDef="let element"> {{element.mobile}} </mat-cell>
         </ng-container>
 
-         <!-- Mobile Column -->
+         <!-- Genfer Column -->
          <ng-container matColumnDef="gender">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Gender. </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.gender.description}} </mat-cell>
+        </ng-container>
+
+        <!-- Edit Column -->
+        <ng-container matColumnDef="edit">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>  </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <a [routerLink]="['/Students',element.id]">
+              <mat-icon color="primary">edit</mat-icon>
+            </a>
+          </mat-cell>
         </ng-container>
 
 

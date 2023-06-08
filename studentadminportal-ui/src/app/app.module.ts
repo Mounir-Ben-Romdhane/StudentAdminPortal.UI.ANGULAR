@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TopNavComponent } from './layout/top-nav/top-nav.component';
 import { StudentsComponent } from './students/students.component';
+import { ViewStudentComponent } from './students/view-student/view-student.component';
 
 // Add below imports to the Imports Section on the top of the page
 
@@ -53,11 +54,13 @@ import { MatTableModule } from '@angular/material/table';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     TopNavComponent,
-    StudentsComponent
+    StudentsComponent,
+    ViewStudentComponent
   ],
   imports: [
     FormsModule,
