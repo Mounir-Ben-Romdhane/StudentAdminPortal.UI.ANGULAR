@@ -11,13 +11,14 @@
         [(ngModel)]="filterString"
         (keyup)="filterStudents()"
       >
+      <a routerLink="/Students/Add" mat-raised-button color="primary" class="btn-add">Add New Student</a>
     </div>
   </div>
 </div>
 
 <div class="container">
   <div class="mt-1 mat-elevation-z8">
-    <table mat-table matSort [dataSource]="dataSource" class="">
+    <table mat-table matSort [dataSource]="dataSource" class="tab">
 
         <!--- Note that these columns can be defined in any order.
               The actual rendered columns are set as a property on the row definition" -->
