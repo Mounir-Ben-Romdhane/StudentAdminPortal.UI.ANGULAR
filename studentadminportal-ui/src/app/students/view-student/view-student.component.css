@@ -5,3 +5,30 @@
 mat-form-field {
   width: 100%;
 }
+
+.image-container{
+  width: 250px;
+  height: 250px;
+  background-color: #F7F7F7;
+  border: 2px solid #CCC;
+  border-radius: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  margin-top: 100px;
+}
+
+.btn-center {
+  margin-top: 20px;
+  border-radius: 13px;
+}
+
+.button1 {
+  width: 150px;
+  border-radius: 13px;
+}
+
+.image-container img {
+  width: 300px;
+}
