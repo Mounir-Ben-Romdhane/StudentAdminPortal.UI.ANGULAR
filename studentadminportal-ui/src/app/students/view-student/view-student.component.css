@@ -7,8 +7,8 @@ mat-form-field {
 }
 
 .image-container{
-  width: 250px;
-  height: 250px;
+  width: 300px;
+  height: 300px;
   background-color: #F7F7F7;
   border: 2px solid #CCC;
   border-radius: 20%;
@@ -31,4 +31,5 @@ mat-form-field {
 
 .image-container img {
   width: 300px;
+  height: 300px;
 }

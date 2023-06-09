@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { StudentService } from '../student.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Student } from 'src/app/models/ui-models/student.model';
 import { GenderService } from 'src/app/services/gender.service';
 import { Gender } from 'src/app/models/ui-models/gender.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-view-student',
@@ -38,6 +39,8 @@ export class ViewStudentComponent implements OnInit {
 
 
   genderList: Gender[] = [];
+
+  @ViewChild('studentDetailsForm') studentDetailsForm?: NgForm;
 
   constructor(private readonly studentService: StudentService,
     private readonly route: ActivatedRoute,
@@ -87,19 +90,25 @@ export class ViewStudentComponent implements OnInit {
   }
 
   onUpdate(): void{
-    //Call student Service to update Student
-    this.studentService.updateStudent(this.student.id,this.student)
-    .subscribe(
-      (seccussRes) => {
-        //show a notif
-        this.snakBar.open('Student updated successfully','Done',{
-          duration: 2000
-        });
-      },
-      (errorRes) => {
-        console.log(errorRes);
-      }
-    );
+    if(this.studentDetailsForm?.form.valid){
+      // Submit from data to api
+      //Call student Service to update Student
+      this.studentService.updateStudent(this.student.id,this.student)
+      .subscribe(
+        (seccussRes) => {
+          //show a notif
+          this.snakBar.open('Student updated successfully','Done',{
+            duration: 2000
+          });
+        },
+        (errorRes) => {
+          console.log(errorRes);
+          this.snakBar.open('Invalid Details! Please check your inputs','Error',{
+            duration: 2000
+          });
+        }
+      );
+    }
   }
 
   onDelete(): void {
@@ -125,23 +134,32 @@ export class ViewStudentComponent implements OnInit {
   }
 
   onAdd(): void{
-    this.studentService.addStudent(this.student)
-    .subscribe(
-      (seccussRes) => {
-        //show a notif
-        this.snakBar.open('Student added successfully',undefined,{
-          duration: 2000
+
+    if(this.studentDetailsForm?.form.valid){
+      // Submit from data to api
+      this.studentService.addStudent(this.student)
+      .subscribe(
+        (seccussRes) => {
+          //show a notif
+          this.snakBar.open('Student added successfully',undefined,{
+            duration: 2000
+            });
+
+            setTimeout(() => {
+              this.router.navigateByUrl('Students');
+            }, 2000);
+
+        },
+        (errorRes) => {
+          console.log(errorRes);
+          this.snakBar.open('Invalid Details! Please check your inputs','Error',{
+            duration: 2000
           });
+        }
+      );
+    }
 
-          setTimeout(() => {
-            this.router.navigateByUrl('Students');
-          }, 2000);
 
-      },
-      (errorRes) => {
-        console.log(errorRes);
-      }
-    );
   }
 
   uploadImage(event: any): void {
