@@ -1,10 +1,13 @@
-<div class="page-header">
+<app-top-nav></app-top-nav>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<div class="main-banner1 wow fadeIn" id="top" data-wow-duration="1s" data-wow-delay="0.5s">
+<div class="show-up">
   <div class="container">
-    <h1>{{header}}</h1>
+    <h2>{{header}}</h2>
   </div>
 </div>
 
-<div class="container">
+<div class="container show-up">
 
   <div class="row top-row">
     <div class="col-xs-12 row end-xs">
@@ -112,11 +115,11 @@
 
           <div class="row">
             <div class="col-xs-12">
-              <div class="row between-xs" *ngIf="!isNewStudent">
+              <div class="row between-xs" *ngIf="!isNewStudent && role === 'Admin'" >
                 <button class="button button1" mat-raised-button color="primary" (click)="onUpdate()">Update details</button>
-                <button class="button button1" mat-raised-button color="warn" (click)="onDelete()">Delete</button>
+                <button class="button button2" mat-raised-button color="warn" (click)="onDelete()">Delete</button>
               </div>
-              <div class="row between-xs" *ngIf="isNewStudent">
+              <div class="row between-xs" *ngIf="isNewStudent && role === 'Admin'">
                 <button class="button button1" mat-raised-button color="primary" (click)="onAdd()">Add</button>
               </div>
             </div>
@@ -134,9 +137,9 @@
       </div>
 
       <div class="row">
-        <div class="col-xs-12 row center-xs mt-1" *ngIf="!isNewStudent">
+        <div class="col-xs-12 row center-xs mt-1" *ngIf="!isNewStudent && role === 'Admin'">
             <input hidden type="file" #imageUpload (change)="uploadImage($event)">
-            <button class="btn-center" mat-raised-button color="primary" (click)="imageUpload.click()">Change Image</button>
+            <button class="btn-center button1" mat-raised-button  (click)="imageUpload.click()">Change Image</button>
         </div>
       </div>
     </div>
@@ -144,3 +147,4 @@
   </div>
 </div>
 
+</div>

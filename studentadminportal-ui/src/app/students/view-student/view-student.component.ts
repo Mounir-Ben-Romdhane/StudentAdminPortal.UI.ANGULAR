@@ -6,6 +6,9 @@ import { GenderService } from 'src/app/services/gender.service';
 import { Gender } from 'src/app/models/ui-models/gender.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgForm } from '@angular/forms';
+import { NgToastService } from 'ng-angular-popup';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { UserStoreService } from 'src/app/services/user-store/user-store.service';
 
 @Component({
   selector: 'app-view-student',
@@ -39,16 +42,26 @@ export class ViewStudentComponent implements OnInit {
 
 
   genderList: Gender[] = [];
-
+  public role!:string;
   @ViewChild('studentDetailsForm') studentDetailsForm?: NgForm;
 
   constructor(private readonly studentService: StudentService,
     private readonly route: ActivatedRoute,
     private readonly genderService: GenderService,
     private snakBar: MatSnackBar,
-    private router: Router) {}
+    private router: Router,
+    private toast: NgToastService,
+    private auth: AuthService,
+    private userStore: UserStoreService) {}
 
   ngOnInit(): void {
+
+    this.userStore.getRoleFromStore()
+        .subscribe(val => {
+          const roleFromToken = this.auth.getRoleFromToken();
+          this.role = val || roleFromToken;
+        });
+
     this.route.paramMap.subscribe(
       (params) => {
        this.studentId = params.get('id');
@@ -97,15 +110,17 @@ export class ViewStudentComponent implements OnInit {
       .subscribe(
         (seccussRes) => {
           //show a notif
-          this.snakBar.open('Student updated successfully','Done',{
+          this.toast.success({detail:"SUCCESS", summary:"Student updated successfully !", duration:3000});
+          /*this.snakBar.open('Student updated successfully','Done',{
             duration: 2000
-          });
+          });*/
         },
         (errorRes) => {
           console.log(errorRes);
-          this.snakBar.open('Invalid Details! Please check your inputs','Error',{
+          this.toast.error({detail:"ERROR", summary:"Invalid Details! Please check your inputs !", duration:3000});
+          /*this.snakBar.open('Invalid Details! Please check your inputs','Error',{
             duration: 2000
-          });
+          });*/
         }
       );
     }
@@ -117,18 +132,20 @@ export class ViewStudentComponent implements OnInit {
     .subscribe(
       (seccussRes) => {
         //show a notif
-        this.snakBar.open('Student deleted successfully','Done',{
+        this.toast.success({detail:"SUCCESS", summary:"Student deleted successfully !", duration:3000});
+        /*this.snakBar.open('Student deleted successfully','Done',{
           duration: 2000
           });
-
+          */
           setTimeout(() => {
             this.router.navigateByUrl('Students');
-          }, 2000);
+          }, 1000);
 
 
       },
       (errorRes) => {
         console.log(errorRes);
+        this.toast.error({detail:"ERROR", summary:"Something is wrong !", duration:3000});
         }
     );
   }
@@ -141,22 +158,26 @@ export class ViewStudentComponent implements OnInit {
       .subscribe(
         (seccussRes) => {
           //show a notif
-          this.snakBar.open('Student added successfully',undefined,{
+          this.toast.success({detail:"SUCCESS", summary:"Student Added successfully !", duration:3000});
+          /*this.snakBar.open('Student added successfully',undefined,{
             duration: 2000
-            });
+            });*/
 
             setTimeout(() => {
               this.router.navigateByUrl('Students');
-            }, 2000);
+            }, 1000);
 
         },
         (errorRes) => {
           console.log(errorRes);
-          this.snakBar.open('Invalid Details! Please check your inputs','Error',{
+          this.toast.error({detail:"ERROR", summary:"Invalid Details! Please check your inputs", duration:3000});
+          /*this.snakBar.open('Invalid Details! Please check your inputs','Error',{
             duration: 2000
-          });
+          });*/
         }
       );
+    }else{
+      this.toast.error({detail:"ERROR", summary:"Your form is invalid !", duration:2000});
     }
 
 
@@ -170,14 +191,15 @@ export class ViewStudentComponent implements OnInit {
         (seccusRes) => {
           this.student.profileImageUrl = seccusRes;
           this.setImage();
-
+          this.toast.success({detail:"SUCCESS", summary:"Profile image updated successfully !", duration:3000});
           //show a notif
-        this.snakBar.open('Profile image successfully','Done',{
+        /*this.snakBar.open('Profile image successfully','Done',{
           duration: 2000
-          });
+          });*/
         },
         (errorRes) => {
           console.log(errorRes);
+          this.toast.error({detail:"ERROR", summary:"Something is wrong !", duration:3000});
         }
       );
     }

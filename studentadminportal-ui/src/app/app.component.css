@@ -1,0 +1,18 @@
+@media screen and (max-width: 600px) {
+  .outer{
+    width: 150% !important;
+    height: 200% !important;
+    background: linear-gradient(to top, #fff 50%, #1CA3E5 90%) no-repeat !important;
+  }
+  .panel{
+    width: 400px !important;
+    min-height: 280px !important;
+    box-shadow: 20px 20px 80px rgb(218, 218, 218) !important;
+    border-radius: 20px !important;
+    position: absolute !important;
+    top: 30% !important;
+    left: 50% !important;
+    transform: translateX(-25%) translateY(-25%) !important;
+    margin: auto !important;
+  }
+}

@@ -51,8 +51,14 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './layout/login/login.component';
+import { SignupComponent } from './layout/signup/signup.component';
+import { NgToastModule } from 'ng-angular-popup';
+import { UserComponent } from './users/user/user.component'
+import { TokenInterceptor } from './interceptors/token.interceptor';
+import { DashboardComponent } from './layout/dashboard/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -60,7 +66,11 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     TopNavComponent,
     StudentsComponent,
-    ViewStudentComponent
+    ViewStudentComponent,
+    LoginComponent,
+    SignupComponent,
+    UserComponent,
+    DashboardComponent
   ],
   imports: [
     FormsModule,
@@ -103,12 +113,18 @@ import { FormsModule } from '@angular/forms';
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    NgToastModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

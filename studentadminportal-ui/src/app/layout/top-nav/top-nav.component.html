@@ -1,9 +1,42 @@
-<mat-toolbar color="primary">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
   <div class="container">
-    <a routerLink="/" mat-fab extended color="primary">
-      <mat-icon>home</mat-icon>
-      HOME
-    </a>
-    <a routerLink="/Students" mat-raised-button class="ml-1">Students</a>
+    <div class="row">
+      <div class="col-12">
+        <nav class="main-nav">
+          <!-- ***** Logo Start ***** -->
+          <a href="#" class="logo">
+            <img src="../../../assets/images/logo.png" width="80"
+            height="60" alt="Chain App Dev">
+          </a>
+          <!-- ***** Logo End ***** -->
+          <!-- ***** Menu Start ***** -->
+          <ul class="nav" >
+            <li class="scroll-to-section" *ngIf="home === true"><a href="#top" (click)="changeEtatHome()" routerLink="/Dashboard" class="active">Home</a></li>
+            <li class="scroll-to-section" *ngIf="home === false"><a href="#top" (click)="changeEtatHome()" routerLink="/Dashboard">Home</a></li>
+            <!--<ng-container *ngIf="role === 'Admin'"> -->
+              <li class="scroll-to-section" *ngIf="students === true"><a href="#services" class="active" (click)="changeEtatStudents()" routerLink="/Students">Students</a></li>
+              <li class="scroll-to-section" *ngIf="students === false"><a href="#services" (click)="changeEtatStudents()" routerLink="/Students">Students</a></li>
+
+              <li class="scroll-to-section" *ngIf="role === 'Admin' && users === true" ><a href="#about" (click)="changeEtatUsers()" class="active" routerLink="/Users">Users</a></li>
+              <li class="scroll-to-section" *ngIf="role === 'Admin' && users === false" ><a href="#about" (click)="changeEtatUsers()"  routerLink="/Users">Users</a></li>
+            <!-- </ng-container> -->
+            <li class="scroll-to-section"><a href="#" class="active">HELLO, {{fullName}}</a></li>
+            <!--<li class="scroll-to-section"><a href="#pricing">Pricing</a></li>
+            <li class="scroll-to-section"><a href="#newsletter">Newsletter</a></li>-->
+            <li><div class="gradient-button"><a id="modal_trigger" (click)="logout()" href="#modal"><i class="fa fa-sign-in-alt"></i> LOG OUT</a></div></li>
+
+          </ul>
+          <a class='menu-trigger'>
+              <span>Menu</span>
+          </a>
+          <!-- ***** Menu End ***** -->
+        </nav>
+      </div>
+    </div>
   </div>
-</mat-toolbar>
+</header>
+<!-- ***** Header Area End ***** -->

@@ -1,22 +1,26 @@
-<div class="page-header">
-  <div class="container">
-    <h1>Students</h1>
-  </div>
-</div>
+<app-top-nav></app-top-nav>
 
-<div class="container">
-  <div class="row end-xs mt-1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<div class="main-banner1  wow fadeIn" id="top" data-wow-duration="1s" data-wow-delay="0.5s">
+
+    <div class="container show-up">
+      <h2 class="h2">List of Students</h2>
+    </div>
+
+
+<div class="container show-up">
+  <div class="row end-xs">
     <div class="col-xs-12">
       <input type="text" class="search-input" placeholder="Search students"
         [(ngModel)]="filterString"
         (keyup)="filterStudents()"
       >
-      <a routerLink="/Students/Add" mat-raised-button color="primary" class="btn-add">Add New Student</a>
+      <a routerLink="/Students/Add" mat-raised-button *ngIf="role === 'Admin'" class="btn-add" >Add New Student</a>
     </div>
   </div>
 </div>
 
-<div class="container">
+<div class="container show-up">
   <div class="mt-1 mat-elevation-z8">
     <table mat-table matSort [dataSource]="dataSource" class="tab">
 
@@ -64,7 +68,8 @@
           <mat-header-cell *matHeaderCellDef mat-sort-header>  </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <a [routerLink]="['/Students',element.id]">
-              <mat-icon color="primary">edit</mat-icon>
+              <mat-icon color="color_blue">edit</mat-icon>
+
             </a>
           </mat-cell>
         </ng-container>
@@ -79,4 +84,6 @@
              aria-label="Select Page">
     </mat-paginator>
     </div>
+</div>
+
 </div>
