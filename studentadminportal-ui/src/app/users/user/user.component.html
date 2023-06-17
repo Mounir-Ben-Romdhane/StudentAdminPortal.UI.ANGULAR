@@ -1,6 +1,6 @@
 <app-top-nav></app-top-nav>
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<div class="main-banner1 wow fadeIn" id="top" data-wow-duration="1s" data-wow-delay="0.5s">
+<div class="container1">
 
   <div class="container show-up">
     <h2 class="h2">List of Users</h2>
@@ -13,7 +13,7 @@
           [(ngModel)]="filterString"
           (keyup)="filterStudents()"
         >
-        <a  mat-raised-button *ngIf="role === 'Admin'" class="btn-add" >Add New User</a>
+        <a routerLink="/Users/Add" mat-raised-button *ngIf="canAddUsers" class="btn-add" >Add New User</a>
       </div>
     </div>
   </div>
@@ -65,7 +65,7 @@
           <ng-container matColumnDef="edit">
             <mat-header-cell *matHeaderCellDef mat-sort-header>  </mat-header-cell>
             <mat-cell *matCellDef="let element">
-              <a href="#">
+              <a href="#" [routerLink]="['/Users',element.id]">
                 <mat-icon color="color_blue">edit</mat-icon>
 
               </a>

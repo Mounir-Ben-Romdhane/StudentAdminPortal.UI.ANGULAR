@@ -4,9 +4,10 @@
 
 export const environment = {
   production: false,
-  baseApiUrl: 'https://studentadminportalapinewservice.azurewebsites.net'
+  baseApiUrl: 'https://localhost:44308'
 };
 //baseApiUrl: 'https://studentadminportalapidotnet.azurewebsites.net'
+//baseApiUrl: 'https://studentadminportalapinewservice.azurewebsites.net'
 //baseApiUrl: 'https://localhost:44308'
 /*
  * For easier debugging in development mode, you can import the following file

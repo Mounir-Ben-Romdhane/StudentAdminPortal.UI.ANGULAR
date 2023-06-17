@@ -45,6 +45,20 @@ export class ViewStudentComponent implements OnInit {
   public role!:string;
   @ViewChild('studentDetailsForm') studentDetailsForm?: NgForm;
 
+  public myClaimsList: Array<string> = [];
+
+  //Crud users
+  public canReadUsers: boolean = false;
+  public canUpdateUsers: boolean = false;
+  public canDeleteUsers: boolean =false;
+  public canAddUsers: boolean = false;
+
+  //Crud students
+  public canReadStudents: boolean = false;
+  public canUpdateStudents: boolean = false;
+  public canDeleteStudents: boolean =false;
+  public canAddStudents: boolean = false;
+
   constructor(private readonly studentService: StudentService,
     private readonly route: ActivatedRoute,
     private readonly genderService: GenderService,
@@ -55,6 +69,39 @@ export class ViewStudentComponent implements OnInit {
     private userStore: UserStoreService) {}
 
   ngOnInit(): void {
+
+    this.userStore.getClaimsFromStore().
+    subscribe(
+      val => {
+        let claimsFromToken = this.auth.getClaimsFromToken();
+        this.myClaimsList = val || claimsFromToken;
+        console.log("listClaims",this.myClaimsList);
+        if(this.myClaimsList.includes("ReadUsers")){
+          this.canReadUsers = true;
+        }
+        if(this.myClaimsList.includes("UpdateUsers")){
+          this.canUpdateUsers = true;
+        }
+        if(this.myClaimsList.includes("DeleteUsers")){
+          this.canDeleteUsers = true;
+        }
+        if(this.myClaimsList.includes("AddUsers")){
+          this.canAddUsers = true;
+        }
+        if(this.myClaimsList.includes("ReadStudents")){
+          this.canReadStudents = true;
+        }
+        if(this.myClaimsList.includes("UpdateStudents")){
+          this.canUpdateStudents = true;
+        }
+        if(this.myClaimsList.includes("DeleteStudents")){
+          this.canDeleteStudents = true;
+        }
+        if(this.myClaimsList.includes("AddStudents")){
+          this.canAddStudents = true;
+        }
+      }
+    )
 
     this.userStore.getRoleFromStore()
         .subscribe(val => {
@@ -114,6 +161,10 @@ export class ViewStudentComponent implements OnInit {
           /*this.snakBar.open('Student updated successfully','Done',{
             duration: 2000
           });*/
+
+          setTimeout(() => {
+            this.router.navigateByUrl('Students');
+          }, 1000);
         },
         (errorRes) => {
           console.log(errorRes);

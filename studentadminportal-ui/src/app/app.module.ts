@@ -59,6 +59,7 @@ import { NgToastModule } from 'ng-angular-popup';
 import { UserComponent } from './users/user/user.component'
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { DashboardComponent } from './layout/dashboard/dashboard/dashboard.component';
+import { ViewUserComponent } from './users/view-user/view-user/view-user.component';
 
 
 @NgModule({
@@ -70,7 +71,8 @@ import { DashboardComponent } from './layout/dashboard/dashboard/dashboard.compo
     LoginComponent,
     SignupComponent,
     UserComponent,
-    DashboardComponent
+    DashboardComponent,
+    ViewUserComponent
   ],
   imports: [
     FormsModule,

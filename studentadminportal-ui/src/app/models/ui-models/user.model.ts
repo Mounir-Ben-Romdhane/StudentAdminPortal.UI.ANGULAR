@@ -6,6 +6,6 @@ export interface User {
   lastName: string,
   userName: string,
   email: string,
-  roleId: string,
-  role: Role
+  password: string,
+  roleId: string
 }
