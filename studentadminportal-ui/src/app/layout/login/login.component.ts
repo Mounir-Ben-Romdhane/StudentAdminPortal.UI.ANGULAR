@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import ValidateForm from 'src/app/helpers/validateform';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { ResetPasswordService } from 'src/app/services/reset-password/reset-password.service';
 import { UserStoreService } from 'src/app/services/user-store/user-store.service';
 
 @Component({
@@ -18,14 +19,17 @@ export class LoginComponent implements OnInit {
   type: string = "password";
   istext: boolean = false;
   eyeIcon: string = "fa-eye-slash";
-  loginForm!: FormGroup;
+  public loginForm!: FormGroup;
+  public resetPasswordEmail!: string;
+  public isValidEmail: boolean = false;
 
   constructor(private fb: FormBuilder,
     private router: Router,
     private auth: AuthService,
     private snakBar: MatSnackBar,
     private toast: NgToastService,
-    private userStore: UserStoreService){}
+    private userStore: UserStoreService,
+    private resetService: ResetPasswordService){}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -85,5 +89,34 @@ export class LoginComponent implements OnInit {
     this.istext ? this.type = "text" : this.type = "password";
   }
 
+
+  checkValidEmail(event: string){
+    const value = event;
+    const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$/;
+    this.isValidEmail = pattern.test(value);
+    return this.isValidEmail;
+  }
+
+  cofirmeToSend()
+  {
+    if(this.checkValidEmail(this.resetPasswordEmail)){
+      console.log(this.resetPasswordEmail);
+
+      //Api call to be done
+
+      this.resetService.sendResetpasswordLink(this.resetPasswordEmail)
+        .subscribe({
+          next:(res)=>{
+            this.toast.success({detail:"SUCCESS", summary:"Reset email sent successfully !", duration:3000});
+            this.resetPasswordEmail = "";
+            const buttonRef = document.getElementById("closeBtn");
+            buttonRef?.click();
+          },
+          error:(err)=>{
+            this.toast.error({detail:"ERROR", summary:"Something went wrong !", duration:2000});
+          }
+        })
+    }
+  }
 
 }

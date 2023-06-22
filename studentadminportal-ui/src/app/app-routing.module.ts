@@ -8,6 +8,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { UserComponent } from './users/user/user.component';
 import { DashboardComponent } from './layout/dashboard/dashboard/dashboard.component';
 import { ViewUserComponent } from './users/view-user/view-user/view-user.component';
+import { ResetComponent } from './layout/reset/reset.component';
 
 const routes: Routes = [
   {
@@ -46,6 +47,10 @@ const routes: Routes = [
     path: 'Users/:id',
     component : ViewUserComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path:'reset',
+    component: ResetComponent
   }
 ];
 

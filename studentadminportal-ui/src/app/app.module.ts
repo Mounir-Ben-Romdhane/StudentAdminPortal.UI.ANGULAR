@@ -60,6 +60,7 @@ import { UserComponent } from './users/user/user.component'
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { DashboardComponent } from './layout/dashboard/dashboard/dashboard.component';
 import { ViewUserComponent } from './users/view-user/view-user/view-user.component';
+import { ResetComponent } from './layout/reset/reset.component';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { ViewUserComponent } from './users/view-user/view-user/view-user.compone
     SignupComponent,
     UserComponent,
     DashboardComponent,
-    ViewUserComponent
+    ViewUserComponent,
+    ResetComponent
   ],
   imports: [
     FormsModule,

@@ -1,11 +1,13 @@
 .outer{
   height: 100vh;
-  background: linear-gradient(to top, #fff 30%, #1CA3E5 90%) no-repeat;
+  background: linear-gradient(to top, #cff2f2 30%, #1CA3E5 90%) no-repeat;
 }
 
 mat-form-field {
   width: 100%;
 }
+
+
 
 .panel-heading h3{
   font-size: 30px;
@@ -34,6 +36,7 @@ a:hover{
   margin: 0;
   cursor: pointer;
 }
+
 
 .btn{
   margin-top: 20px;

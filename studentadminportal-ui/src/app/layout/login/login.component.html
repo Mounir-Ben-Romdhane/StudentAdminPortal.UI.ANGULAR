@@ -27,9 +27,10 @@
               </div>
               <small *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required','password')" class="text-danger ml-1">*Password is required</small>
 
-              <div class="form-inline fr mt-4">
-                <a id="forget" class="font-weight-bold">Forget Password ?</a>
+              <div class="form-inline fr mt-4" style="text-align: right;">
+                <a id="forget" data-bs-toggle="modal" data-bs-target="#exampleModal">Forget Password ?</a>
               </div>
+
               <button (click)="onLogin()" type="submit" class="btn btn-primary btn-block mt-4 w-100">Login</button>
 
               <div class="text-center pt-4 text-muted">Dont't have account ? <a id="forget" routerLink="/signup">Sign Up</a> </div>
@@ -47,3 +48,28 @@
     </div>
   </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="modal-title" style="color: #1CA3E5; font-size: large;" id="exampleModalLabel"><span class="font-size: 20px; font-weight:800">Forget your password !</span><br>
+          <small style="font-size: small;">Please provide your E-mail we will send the reset link</small></p>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group pt-3">
+          <div class="input-field"> <span class="fa fa-user p-2"></span> <input [(ngModel)]="resetPasswordEmail" (ngModelChange)="checkValidEmail($event)" type="text" placeholder="Email"> </div>
+        </div>
+        <small *ngIf="!resetPasswordEmail" class="text-danger">*Email is required !</small>
+        <small *ngIf="!isValidEmail && resetPasswordEmail" class="text-danger">*Email is invalid !</small>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="closeBtn" class="btn" style="color: white; background-color: red; border-color: red;" data-bs-dismiss="modal">Close</button>
+        <button type="button" (click)="cofirmeToSend()" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
